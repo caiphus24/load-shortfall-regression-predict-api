@@ -59,6 +59,9 @@ def _preprocess_data(data):
     # ---------------------------------------------------------------
 
     # ----------- Replace this code with your own preprocessing steps --------
+
+    feature_vector_df = feature_vector_df.drop(
+        ["Unnamed: 0", "Valencia_wind_deg", "Seville_pressure"], axis=1)
     feature_vector_df['time'] = pd.to_datetime(
         feature_vector_df['time'], format='%Y-%m-%d %H:%M:%S')
     feature_vector_df['year'] = feature_vector_df['time'].dt.year
@@ -68,8 +71,8 @@ def _preprocess_data(data):
     feature_vector_df['minute'] = feature_vector_df['time'].dt.minute
     feature_vector_df['Valencia_pressure'] = feature_vector_df['Valencia_pressure'].fillna(
         feature_vector_df['Valencia_pressure'].mode()[0])
-    feature_vector_df = feature_vector_df(["minute", "Barcelona_temp_min", "Bilbao_temp_min", "Bilbao_temp", 'Seville_temp_max', 'Valencia_temp_max',
-                                           'Valencia_temp_min', 'Barcelona_temp_max', 'Madrid_temp_max', 'Bilbao_temp_max', 'Seville_temp_min', "Bilbao_wind_deg"], axis=1)
+    feature_vector_df = feature_vector_df.drop(["minute", "Barcelona_temp_min", "Bilbao_temp_min", "Bilbao_temp", 'Seville_temp_max', 'Valencia_temp_max',
+                                                'Valencia_temp_min', 'Barcelona_temp_max', 'Madrid_temp_max', 'Bilbao_temp_max', 'Seville_temp_min', "Bilbao_wind_deg"], axis=1)
 
     # ------------------------------------------------------------------------
 
